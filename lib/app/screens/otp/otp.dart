@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:phone_number/phone_number.dart';
-import 'package:quiz_u/app/screens/otp/otp.dart';
-
-class LoginScreen extends StatelessWidget {
+import 'package:otp_text_field/otp_field.dart';
+import 'package:otp_text_field/style.dart';
+import 'package:quiz_u/app/screens/name/name.dart';
+class OtpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return LoginScreenStateful(
-      title: "Login",
+    return OtpScreenStateful(
+      title: "Otp",
     );
   }
 }
 
-class LoginScreenStateful extends StatefulWidget {
-  LoginScreenStateful({Key? key, required this.title}) : super(key: key);
+class OtpScreenStateful extends StatefulWidget {
+  OtpScreenStateful({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _OtpScreenState createState() => _OtpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreenStateful> {
+class _OtpScreenState extends State<OtpScreenStateful> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body:
-        SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(20),
             margin: const EdgeInsets.fromLTRB(0, 100, 0, 100),
@@ -43,13 +42,11 @@ class _LoginScreenState extends State<LoginScreenStateful> {
                   ),
                 ),
                 Column(
-                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    // mainAxisAlignment: MainAxisAlignment.start,
                     children: const <Widget>[
                       Text(
-                        "Mobile",
+                        "Please Enter the OTP send to your mobile",
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           fontSize: 20,
@@ -57,12 +54,21 @@ class _LoginScreenState extends State<LoginScreenStateful> {
                           color: Colors.black,
                         ),
                       ),
-                      TextField(
-                        keyboardType: TextInputType.phone,
-                        decoration: InputDecoration(
-                            hintText: "500000",
-                            fillColor: Color(0xfff3f3f4),
-                            filled: true),
+                      OTPTextField(
+                        margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                        length: 4,
+                        width: double.infinity,
+                        textFieldAlignment: MainAxisAlignment.spaceAround,
+                        fieldWidth: 45,
+                        fieldStyle: FieldStyle.box,
+                        outlineBorderRadius: 15,
+                        style: TextStyle(fontSize: 17),
+                        // onChanged: (pin) {
+                        //   print("Changed: " + pin);
+                        // },
+                        // onCompleted: (pin) {
+                        //   print("Completed: " + pin);
+                        // }),
                       ),
                     ]),
                 Row(
@@ -82,16 +88,16 @@ class _LoginScreenState extends State<LoginScreenStateful> {
                       onPressed: () => {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (BuildContext context) {
-                              return OtpScreen();
+                              return NameScreen();
                             }))
                       },
-                      child: Text('Start'),
+                      child: Text('Check'),
                     )
                   ],
                 ),
               ],
             ),
           ),
-    ));
+        ));
   }
 }

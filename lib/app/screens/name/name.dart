@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:phone_number/phone_number.dart';
-import 'package:quiz_u/app/screens/otp/otp.dart';
+import 'package:quiz_u/app/screens/login/login.dart';
 
-class LoginScreen extends StatelessWidget {
+class NameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return LoginScreenStateful(
-      title: "Login",
+    return NameScreenStateful(
+      title: "Enter Name",
     );
   }
 }
 
-class LoginScreenStateful extends StatefulWidget {
-  LoginScreenStateful({Key? key, required this.title}) : super(key: key);
+class NameScreenStateful extends StatefulWidget {
+  NameScreenStateful({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _NameScreenState createState() => _NameScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreenStateful> {
+class _NameScreenState extends State<NameScreenStateful> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +48,7 @@ class _LoginScreenState extends State<LoginScreenStateful> {
                     // mainAxisAlignment: MainAxisAlignment.start,
                     children: const <Widget>[
                       Text(
-                        "Mobile",
+                        "What's your name?",
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           fontSize: 20,
@@ -58,9 +57,8 @@ class _LoginScreenState extends State<LoginScreenStateful> {
                         ),
                       ),
                       TextField(
-                        keyboardType: TextInputType.phone,
+                        keyboardType: TextInputType.text,
                         decoration: InputDecoration(
-                            hintText: "500000",
                             fillColor: Color(0xfff3f3f4),
                             filled: true),
                       ),
@@ -82,16 +80,16 @@ class _LoginScreenState extends State<LoginScreenStateful> {
                       onPressed: () => {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (BuildContext context) {
-                              return OtpScreen();
+                              return LoginScreen();
                             }))
                       },
-                      child: Text('Start'),
+                      child: Text('Done'),
                     )
                   ],
                 ),
               ],
             ),
           ),
-    ));
+        ));
   }
 }

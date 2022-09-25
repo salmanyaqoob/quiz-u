@@ -61,7 +61,9 @@ class _LoginScreenState extends State<LoginScreenStateful> {
                   color: Colors.black,
                 ),
               ),
-              Container(height: 120,),
+              Container(
+                height: 120,
+              ),
               const Text(
                 "Mobile",
                 textAlign: TextAlign.start,
@@ -70,6 +72,40 @@ class _LoginScreenState extends State<LoginScreenStateful> {
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
+              ),
+              const TextField(
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                    hintText: "500000",
+                    fillColor: Color(0xfff3f3f4),
+                    filled: true),
+              ),
+              Container(
+                height: 50,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      primary: Colors.black87,
+                      backgroundColor: Colors.grey,
+                      minimumSize: Size(88, 46),
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(2.0)),
+                      ),
+                    ),
+                    onPressed: () => {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return LoginScreen();
+                      }))
+                    },
+                    child: Text('Start'),
+                  )
+                ],
               ),
             ],
           ),

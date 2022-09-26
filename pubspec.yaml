@@ -1,5 +1,5 @@
 name: quiz_u
-description: A new Flutter project.
+description: "Quiz U app"
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -33,10 +33,12 @@ dependencies:
     sdk: flutter
   phone_number: ^1.0.0
   otp_text_field: ^1.1.3
+  extended_phone_number_input: ^1.0.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  font_awesome_flutter: ^10.2.1
 
 dev_dependencies:
   flutter_test:
@@ -62,6 +64,8 @@ flutter:
 
   assets:
     - assets/images/timer.png
+    - assets/images/success.png
+    - assets/images/failure.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

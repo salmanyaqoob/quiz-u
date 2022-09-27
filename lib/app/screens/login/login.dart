@@ -5,6 +5,7 @@ import 'package:extended_phone_number_input/phone_number_input.dart';
 import 'package:quiz_u/app/screens/login/login_controller.dart';
 import 'package:quiz_u/app/screens/otp/otp.dart';
 import 'package:get/get.dart';
+import 'package:quiz_u/app/screens/otp/otp_bindings.dart';
 
 class LoginScreen extends GetView<LoginController> {
   @override
@@ -66,10 +67,11 @@ class LoginScreen extends GetView<LoginController> {
                       ),
                       onPressed: () async => {
                         if(await controller.validateMyPhoneNumber()){
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (BuildContext context) {
-                                return OtpScreen();
-                              }))
+                          // Navigator.push(context,
+                          //     MaterialPageRoute(builder: (BuildContext context) {
+                          //       return OtpScreen();
+                          //     }))
+                        Get.to(OtpScreen(), routeName: "/otp", binding: OtpBinding())
                         }
                       },
                       child: Text('Start'),

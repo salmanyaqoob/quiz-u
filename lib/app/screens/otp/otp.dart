@@ -31,11 +31,10 @@ class OtpScreen extends GetView<OtpController> {
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Center(child: Text("${loginController.mobile_number}")),
-                              const Text(
-                                "Please Enter the OTP send to your mobile",
+                              Text(
+                                "Please Enter the OTP send to your mobile ${loginController.mobile_number}", //
                                 textAlign: TextAlign.start,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
@@ -76,12 +75,15 @@ class OtpScreen extends GetView<OtpController> {
                                   BorderRadius.all(Radius.circular(2.0)),
                                 ),
                               ),
-                              onPressed: () =>
+                              onPressed: () async =>
                               {
-                                Navigator.push(context, MaterialPageRoute(
-                                    builder: (BuildContext context) {
-                                      return NameScreen();
-                                    }))
+                                if(controller.validateOtpNumber()){
+                                  controller.loginUser()
+                                }
+                                // Navigator.push(context, MaterialPageRoute(
+                                //     builder: (BuildContext context) {
+                                //       return NameScreen();
+                                //     }))
                               },
                               child: Text('Check'),
                             )

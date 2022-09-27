@@ -5,7 +5,9 @@ import 'package:quiz_u/app/screens/login/login.dart';
 import 'package:quiz_u/app/screens/login/login_bindings.dart';
 import 'package:quiz_u/app/screens/otp/otp.dart';
 import 'package:quiz_u/app/screens/otp/otp_bindings.dart';
-
+import 'package:quiz_u/app/screens/splash/splash.dart';
+import 'package:quiz_u/app/screens/splash/splash_bindings.dart';
+import 'package:get_storage/get_storage.dart';
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
@@ -27,10 +29,12 @@ class _MyAppState extends State<MyApp> {
       darkTheme: null,
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
+      initialBinding: LoginBinding(),
       //routes: buildNamedRoutes(),
       getPages: [
-        GetPage(name: '/', page: () => LoginScreen(), binding: LoginBinding()),
-        GetPage(name: '/', page: () => OtpScreen(), binding: OtpBinding()),
+        GetPage(name: '/', page: () => SplashView(), binding: SplashBinding()),
+        GetPage(name: '/login', page: () => LoginScreen(), binding: LoginBinding()),
+        GetPage(name: '/otp', page: () => OtpScreen(), binding: OtpBinding()),
       ],
     );
   }

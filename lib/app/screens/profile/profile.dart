@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quiz_u/app/screens/splash/app_controller.dart';
+import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProfileScreenStateful(
-      title: "Enter Name",
+      title: "Profile",
     );
   }
 }
@@ -19,6 +21,8 @@ class ProfileScreenStateful extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreenStateful> {
+  final AppController appController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,11 +31,15 @@ class _ProfileScreenState extends State<ProfileScreenStateful> {
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Row(mainAxisAlignment: MainAxisAlignment.end, children: const [
-              FaIcon(
-                FontAwesomeIcons.signOut,
-                color: Colors.black,
-              )
+            Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+              ElevatedButton.icon(
+                  onPressed: () => {appController.logout()},
+                  icon: const FaIcon(
+                    FontAwesomeIcons.signOut,
+                    color: Colors.black,
+                  ), label: Text("Logout", style: TextStyle(color: Colors.black),),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.grey.shade50),
+                  )
             ]),
             const Padding(
               padding: EdgeInsets.only(top: 20, bottom: 50),
@@ -44,16 +52,16 @@ class _ProfileScreenState extends State<ProfileScreenStateful> {
                 ),
               ),
             ),
-            const Text(
-              "Name: Salman Yaqoob",
-              style: TextStyle(
+            Text(
+              "Name: ${appController.name.value}",
+              style: const TextStyle(
                 fontSize: 22,
                 color: Colors.black,
               ),
             ),
-            const Text(
-              "Mobile: +966 5664548686",
-              style: TextStyle(
+            Text(
+              "Mobile: ${appController.mobile.value}",
+              style: const TextStyle(
                 fontSize: 22,
                 color: Colors.black,
               ),
@@ -77,28 +85,26 @@ class _ProfileScreenState extends State<ProfileScreenStateful> {
                 ),
               ),
             ),
-            Column(
-              children: [
-                Flex(
-                    direction: Axis.horizontal,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text("2022-10-22 10:00AM",
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(fontSize: 18)),
-                      Text("10", style: TextStyle(fontSize: 18))
-                    ]),
-                Flex(
-                    direction: Axis.horizontal,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text("2022-10-22 10:00AM",
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(fontSize: 18)),
-                      Text("10", style: TextStyle(fontSize: 18))
-                    ]),
-              ]
-            )
+            Column(children: [
+              Flex(
+                  direction: Axis.horizontal,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text("2022-10-22 10:00AM",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 18)),
+                    Text("10", style: TextStyle(fontSize: 18))
+                  ]),
+              Flex(
+                  direction: Axis.horizontal,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text("2022-10-22 10:00AM",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 18)),
+                    Text("10", style: TextStyle(fontSize: 18))
+                  ]),
+            ])
           ],
         ),
       )),

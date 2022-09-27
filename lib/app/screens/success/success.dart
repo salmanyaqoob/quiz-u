@@ -40,7 +40,7 @@ class _SuccessScreenState extends State<SuccessScreenStateful> {
                                         Navigator.push(context,
                                             MaterialPageRoute(builder:
                                                 (BuildContext context) {
-                                          return HomePage();
+                                          return HomeScreen();
                                         }))
                                       },
                                   icon: const FaIcon(

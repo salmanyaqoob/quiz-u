@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quiz_u/app/screens/home/home.dart';
+import 'package:quiz_u/app/screens/home/home_bindings.dart';
 import 'package:quiz_u/app/screens/login/login.dart';
 import 'package:quiz_u/app/screens/login/login_bindings.dart';
 import 'package:quiz_u/app/screens/name/name.dart';
-import 'package:quiz_u/app/screens/splash/splash_controller.dart';
-import 'package:easy_splash_screen/easy_splash_screen.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:quiz_u/app/screens/name/name_bindings.dart';
+import 'package:quiz_u/app/screens/splash/app_controller.dart';
 
-class SplashView extends GetView<SplashController> {
+class SplashView extends GetView<AppController> {
   SplashView() {
     print("SplashView loaded");
     futureCall();
@@ -45,16 +45,10 @@ class SplashView extends GetView<SplashController> {
     String route = await controller.validateToken();
 
     if (route == 'login') {
-      Get.to(LoginScreen(), binding: LoginBinding(), routeName: "/login");
-    } else if (route == 'name') {
-      Get.to(NameScreen(), routeName: "/name");
+      Get.off(LoginScreen(), binding: LoginBinding(), routeName: "/login");
     } else {
-      Get.to(HomePage(), routeName: "/name");
+      //Get.offNamed("/");
+      Get.off(HomeScreen(), binding: HomeBinding(), routeName: "/home");
     }
-  }
-
-  Widget redirectPage() {
-    // Get.to(LoginScreen(), binding: LoginBinding(), routeName: "/login");
-    return LoginScreen();
   }
 }

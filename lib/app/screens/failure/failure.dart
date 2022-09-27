@@ -39,7 +39,7 @@ class _FailureScreenState extends State<FailureScreenStateful> {
                                     Navigator.push(context,
                                         MaterialPageRoute(builder:
                                             (BuildContext context) {
-                                          return HomePage();
+                                          return HomeScreen();
                                         }))
                                   },
                                   icon: const FaIcon(
@@ -75,7 +75,7 @@ class _FailureScreenState extends State<FailureScreenStateful> {
                           onPressed: () => {
                             Navigator.push(context, MaterialPageRoute(
                                 builder: (BuildContext context) {
-                                  return HomePage();
+                                  return HomeScreen();
                                 }))
                           },
                           child: Text('Try Again'),

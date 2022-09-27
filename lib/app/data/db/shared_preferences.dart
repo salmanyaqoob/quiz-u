@@ -5,7 +5,11 @@ class SharedPreferences{
     GetStorage().write("token", token);
   }
 
-  Future<String?> getToken() async{
-    return await GetStorage().read("token");
+  String? getToken() {
+    return GetStorage().read("token");
+  }
+
+  void deleteToken(){
+    GetStorage().remove("token");
   }
 }

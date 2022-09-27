@@ -1,24 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_u/app/screens/home/home.dart';
+import 'package:get/get.dart';
 
-class NameScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return NameScreenStateful(
-      title: "Enter Name",
-    );
-  }
-}
-
-class NameScreenStateful extends StatefulWidget {
-  NameScreenStateful({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _NameScreenState createState() => _NameScreenState();
-}
-
-class _NameScreenState extends State<NameScreenStateful> {
+import 'name_controller.dart';
+class NameScreen extends GetView<NameController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,12 +24,12 @@ class _NameScreenState extends State<NameScreenStateful> {
                           ),
                         ),
                         Column(
-                            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             // mainAxisAlignment: MainAxisAlignment.start,
-                            children: const <Widget>[
-                              Text(
+                            children:  <Widget>[
+                              const Text(
                                 "What's your name?",
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
@@ -55,35 +40,27 @@ class _NameScreenState extends State<NameScreenStateful> {
                               ),
                               TextField(
                                 keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
+                                onChanged: (name)=>{controller.updateName(name)},
+                                decoration: const InputDecoration(
                                     fillColor: Color(0xfff3f3f4), filled: true),
                               ),
                             ]),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TextButton(
-                              style: TextButton.styleFrom(
-                                primary: Colors.black87,
-                                backgroundColor: Colors.grey,
-                                minimumSize: Size(88, 46),
-                                textStyle: TextStyle(fontSize: 26),
-                                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(2.0)),
-                                ),
-                              ),
-                              onPressed: () => {
-                                Navigator.push(context, MaterialPageRoute(
-                                    builder: (BuildContext context) {
-                                  return HomePage();
-                                }))
-                              },
-                              child: Text('Done'),
-                            )
-                          ],
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            primary: Colors.black87,
+                            backgroundColor: Colors.grey,
+                            minimumSize: Size(88, 46),
+                            textStyle: TextStyle(fontSize: 26),
+                            padding: EdgeInsets.symmetric(horizontal: 16.0),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(2.0)),
+                            ),
+                          ),
+                          onPressed: () async => {
+                            controller.submitName()
+                          },
+                          child: Text('Done'),
                         ),
                       ],
                     )))));

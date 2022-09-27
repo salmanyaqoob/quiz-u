@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:quiz_u/app/screens/home/home_controller.dart';
 
 class LeaderBoardScreen extends StatelessWidget {
   @override
@@ -18,74 +20,55 @@ class LeaderBoardScreenStateful extends StatefulWidget {
 }
 
 class _LeaderBoardScreenState extends State<LeaderBoardScreenStateful> {
+  final HomeController homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    homeController.getTopScores();
 
+    return Scaffold(
         body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 50, bottom: 20),
-                child: Text(
-                  "Leaderboard",
-                  style: TextStyle(
-                    fontSize: 50,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
+      padding: EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(top: 50, bottom: 20),
+            child: Text(
+              "Leaderboard",
+              style: TextStyle(
+                fontSize: 50,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
               ),
-              Expanded(
-                child: CustomScrollView(
-                  shrinkWrap: true,
-                  slivers: <Widget>[
-                    SliverPadding(
-                      padding: const EdgeInsets.symmetric(vertical: 0),
-                      sliver: SliverList(
-                        delegate: SliverChildListDelegate(
-                          <Widget>[
-                            Flex(
-                                direction: Axis.horizontal,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: const [
-                                  Text("Salman Mohammed Yaqoob",
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(fontSize: 18)),
-                                  Text("10", style: TextStyle(fontSize: 18))
-                                ]),
-                            Flex(
-                                direction: Axis.horizontal,
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceAround,
-                                children: const [
-                                  Text("Salman Mohammed Yaqoob",
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(fontSize: 18)),
-                                  Text("10", style: TextStyle(fontSize: 18))
-                                ]),
-                            Flex(
-                                direction: Axis.horizontal,
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceAround,
-                                children: const [
-                                  Text("Salman Mohammed Yaqoob",
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(fontSize: 18)),
-                                  Text("10", style: TextStyle(fontSize: 18))
-                                ]),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
+            ),
           ),
-        ));
+          Expanded(child: Obx(() => loadLeaderBoard()))
+        ],
+      ),
+    ));
+  }
+
+  Widget loadLeaderBoard() {
+    if (homeController.loadingLeaderBoard.value) {
+      return const Center(
+        child: CircularProgressIndicator(
+          color: Colors.blue,
+        ),
+      );
+    } else {
+      return ListView.builder(
+          itemCount: null == homeController.topScores
+              ? 0
+              : homeController.topScores!.length,
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+              title: Text("${homeController.topScores![index]!.name}"),
+              trailing: Text(
+                "${homeController.topScores![index]!.score}",
+                style: TextStyle(color: Colors.green, fontSize: 15),
+              ),
+            );
+          });
+    }
   }
 }

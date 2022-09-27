@@ -6,6 +6,7 @@ import 'package:quiz_u/app/screens/name/name.dart';
 import '../../data/db/shared_preferences.dart';
 import '../../data/model/LoginResponse.dart';
 import '../login/login_controller.dart';
+import '../name/name_bindings.dart';
 
 class OtpController extends GetxController {
   var otp_number = "".obs;
@@ -41,7 +42,7 @@ class OtpController extends GetxController {
     if(loginResponse!.success){
       SharedPreferences().saveToken(loginResponse.token);
       if((loginResponse.userStatus != null && loginResponse.userStatus == "new") || (loginResponse.name == null)){
-        Get.to(NameScreen());
+        Get.to(NameScreen(), routeName: "/name", binding: NameBinding());
       }
     } else {
       Get.snackbar("Error", loginResponse.message);

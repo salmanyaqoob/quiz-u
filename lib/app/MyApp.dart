@@ -9,6 +9,8 @@ import 'package:quiz_u/app/screens/name/name.dart';
 import 'package:quiz_u/app/screens/name/name_bindings.dart';
 import 'package:quiz_u/app/screens/otp/otp.dart';
 import 'package:quiz_u/app/screens/otp/otp_bindings.dart';
+import 'package:quiz_u/app/screens/quiz/quiz.dart';
+import 'package:quiz_u/app/screens/quiz/quiz_bindings.dart';
 import 'package:quiz_u/app/screens/splash/splash.dart';
 import 'package:quiz_u/app/screens/splash/app_bindings.dart';
 import 'package:get_storage/get_storage.dart';
@@ -41,6 +43,7 @@ class _MyAppState extends State<MyApp> {
         GetPage(name: '/otp', page: () => OtpScreen(), binding: OtpBinding()),
         GetPage(name: '/name', page: () => NameScreen(), binding: NameBinding()),
         GetPage(name: '/home', page: () => HomeScreen(), binding: HomeBinding()),
+        GetPage(name: '/quiz', page: () => QuizScreen(), binding: QuizBinding()),
       ],
     );
   }

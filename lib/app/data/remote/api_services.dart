@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:quiz_u/app/data/model/LoginResponse.dart';
+import 'package:quiz_u/app/data/model/QuizQuestion.dart';
 import 'package:quiz_u/app/data/model/TopScores.dart';
 import 'package:quiz_u/app/data/model/UserInfo.dart';
 import 'package:quiz_u/app/data/request/login_request.dart';
@@ -114,6 +115,28 @@ class ApiService {
         return _model;
       } else { // Error 401
         List<TopScores> _model = topScoresFromJson(response.body);
+        return _model;
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  FutureOr<List<QuizQuestion>?> getQuizQuestions(var token) async {
+    try {
+      var url = Uri.parse(ApiConstants.baseUrl + ApiConstants.questionsEndpoint);
+      var response = await http.get(url, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      });
+      print("statusCode: ${response.statusCode}");
+      print("body: ${response.body}");
+      if (response.statusCode >= 200 && response.statusCode < 400) {
+        List<QuizQuestion> _model = quizQuestionFromJson(response.body);
+        return _model;
+      } else { // Error 401
+        List<QuizQuestion> _model = quizQuestionFromJson(response.body);
         return _model;
       }
     } catch (e) {

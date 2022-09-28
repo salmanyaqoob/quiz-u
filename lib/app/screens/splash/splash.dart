@@ -4,8 +4,6 @@ import 'package:quiz_u/app/screens/home/home.dart';
 import 'package:quiz_u/app/screens/home/home_bindings.dart';
 import 'package:quiz_u/app/screens/login/login.dart';
 import 'package:quiz_u/app/screens/login/login_bindings.dart';
-import 'package:quiz_u/app/screens/name/name.dart';
-import 'package:quiz_u/app/screens/name/name_bindings.dart';
 import 'package:quiz_u/app/screens/splash/app_controller.dart';
 
 class SplashView extends GetView<AppController> {

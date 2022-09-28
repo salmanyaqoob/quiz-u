@@ -5,6 +5,8 @@ import 'package:quiz_u/app/screens/login/login.dart';
 import 'package:quiz_u/app/screens/otp/otp.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quiz_u/app/screens/profile/profile.dart';
+import 'package:quiz_u/app/screens/quiz/quiz.dart';
+import 'package:quiz_u/app/screens/quiz/quiz_bindings.dart';
 import 'package:quiz_u/app/screens/success/success.dart';
 import 'package:get/get.dart';
 
@@ -178,6 +180,7 @@ class HomeScreen extends GetView<HomeController> {
                       ),
                     ),
                     onPressed: () => {
+                      Get.to(QuizScreen(), binding: QuizBinding(), routeName: "/quiz")
                       // Navigator.push(context,
                       //     MaterialPageRoute(builder: (BuildContext context) {
                       //       return SuccessScreen();

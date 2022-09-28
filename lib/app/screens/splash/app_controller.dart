@@ -13,17 +13,10 @@ class AppController extends GetxController {
   var mobile = "".obs;
 
   void updateName(var name) {
-    name.value = name;
+    this.name.value = name;
   }
   updateMobile(var mobile) {
-    mobile.value = mobile;
-  }
-
-  void logout(){
-    updateName(null);
-    updateMobile(null);
-    SharedPreferences().deleteToken();
-    Get.to(LoginScreen(), binding: LoginBinding(), routeName: "/login");
+    this.mobile.value = mobile;
   }
 
   Future<String> validateToken() async {
@@ -49,5 +42,12 @@ class AppController extends GetxController {
       }
     }
     return route;
+  }
+
+  void logout(){
+    updateName("");
+    updateMobile("");
+    SharedPreferences().deleteToken();
+    Get.offAll(LoginScreen(), binding: LoginBinding(), routeName: "/login");
   }
 }

@@ -9,6 +9,9 @@ import '../../data/db/shared_preferences.dart';
 import '../../data/model/TokenResponse.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../login/login.dart';
+import '../login/login_bindings.dart';
+
 class HomeController extends GetxController {
   var loadingLeaderBoard = true.obs;
   var selectedIndex = 0.obs;

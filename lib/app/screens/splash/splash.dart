@@ -5,8 +5,9 @@ import 'package:quiz_u/app/screens/home/home_bindings.dart';
 import 'package:quiz_u/app/screens/login/login.dart';
 import 'package:quiz_u/app/screens/login/login_bindings.dart';
 import 'package:quiz_u/app/screens/splash/app_controller.dart';
+import 'package:quiz_u/app/screens/splash/splash_controller.dart';
 
-class SplashView extends GetView<AppController> {
+class SplashView extends GetView<SplashController> {
   SplashView() {
     print("SplashView loaded");
     futureCall();
@@ -39,8 +40,9 @@ class SplashView extends GetView<AppController> {
   }
 
     void futureCall() async {
+      final AppController appController = Get.find();
     // do async operation ( api call, auto login)
-    String route = await controller.validateToken();
+    String route = await appController.validateToken();
 
     if (route == 'login') {
       Get.off(LoginScreen(), binding: LoginBinding(), routeName: "/login");

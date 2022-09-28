@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:quiz_u/app/screens/home/home.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quiz_u/app/screens/home/home_bindings.dart';
+import 'package:quiz_u/app/screens/quiz/quiz.dart';
+import 'package:quiz_u/app/screens/quiz/quiz_bindings.dart';
 
 class FailureScreen extends StatelessWidget {
   @override
@@ -36,11 +40,12 @@ class _FailureScreenState extends State<FailureScreenStateful> {
                             children: [
                               IconButton(
                                   onPressed: () => {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder:
-                                            (BuildContext context) {
-                                          return HomeScreen();
-                                        }))
+                                    // Navigator.push(context,
+                                    //     MaterialPageRoute(builder:
+                                    //         (BuildContext context) {
+                                    //       return HomeScreen();
+                                    //     }))
+                                    Get.off(HomeScreen(), routeName: "/home", binding: HomeBinding())
                                   },
                                   icon: const FaIcon(
                                     FontAwesomeIcons.close,
@@ -73,10 +78,11 @@ class _FailureScreenState extends State<FailureScreenStateful> {
                             ),
                           ),
                           onPressed: () => {
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (BuildContext context) {
-                                  return HomeScreen();
-                                }))
+                            // Navigator.push(context, MaterialPageRoute(
+                            //     builder: (BuildContext context) {
+                            //       return HomeScreen();
+                            //     }))
+                            Get.off(QuizScreen(), routeName: "/quiz", binding: QuizBinding())
                           },
                           child: Text('Try Again'),
                         ),

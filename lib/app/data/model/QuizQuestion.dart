@@ -8,20 +8,20 @@ String quizQuestionToJson(List<QuizQuestion> data) => json.encode(List<dynamic>.
 
 class QuizQuestion {
   QuizQuestion({
-    required this.question,
-    required this.a,
-    required this.b,
-    required this.c,
-    required this.d,
-    required this.correct,
+    this.question,
+    this.a,
+    this.b,
+    this.c,
+    this.d,
+    this.correct,
   });
 
-  String question;
-  String a;
-  String b;
-  String c;
-  String d;
-  Correct? correct=Correct.A;
+  String? question;
+  String? a;
+  String? b;
+  String? c;
+  String? d;
+  String? correct;
 
   factory QuizQuestion.fromJson(Map<String, dynamic> json) => QuizQuestion(
     question: json["Question"],
@@ -29,7 +29,7 @@ class QuizQuestion {
     b: json["b"],
     c: json["c"],
     d: json["d"],
-    correct: correctValues.map[json["correct"]],
+    correct: json["correct"],
   );
 
   Map<String, dynamic> toJson() => {

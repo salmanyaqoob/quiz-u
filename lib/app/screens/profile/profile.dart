@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quiz_u/app/screens/splash/app_controller.dart';
 import 'package:get/get.dart';
 
+import '../home/home_controller.dart';
+
 class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,7 @@ class ProfileScreenStateful extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreenStateful> {
   final AppController appController = Get.find();
+  final HomeController homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {

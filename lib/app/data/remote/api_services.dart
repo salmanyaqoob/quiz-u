@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:quiz_u/app/data/model/LoginResponse.dart';
 import 'package:quiz_u/app/data/model/QuizQuestion.dart';
+import 'package:quiz_u/app/data/model/ScoreResponse.dart';
 import 'package:quiz_u/app/data/model/TopScores.dart';
 import 'package:quiz_u/app/data/model/UserInfo.dart';
 import 'package:quiz_u/app/data/request/login_request.dart';
@@ -144,5 +145,25 @@ class ApiService {
     }
   }
 
+  Future<ScoreResponse?> submitScore(String score, var token) async {
+    try {
+      var url = Uri.parse(ApiConstants.baseUrl + ApiConstants.scoreEndpoint);
+      var response = await http.post(url, body: {"score": score}, headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      });
+      print("statusCode: ${response.statusCode}");
+      print("body: ${response.body}");
+      if (response.statusCode >= 200 && response.statusCode < 400) {
+        ScoreResponse _model = scoreResponseFromJson(response.body);
+        return _model;
+      } else { // Error 401
+        ScoreResponse _model = scoreResponseFromJson(response.body);
+        return _model;
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 
 }

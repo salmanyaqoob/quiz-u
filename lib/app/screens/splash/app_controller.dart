@@ -50,4 +50,13 @@ class AppController extends GetxController {
     SharedPreferences().deleteToken();
     Get.offAll(LoginScreen(), binding: LoginBinding(), routeName: "/login");
   }
+
+  bool? checkFirstTimeOpen(){
+    return SharedPreferences().getFirstTimeOpen();
+  }
+
+  firstTimeOpen(){
+    SharedPreferences().setFirstTimeOpen();
+  }
+
 }

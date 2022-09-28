@@ -28,89 +28,102 @@ class _ProfileScreenState extends State<ProfileScreenStateful> {
 
   @override
   Widget build(BuildContext context) {
+    homeController.getMyScores();
     return Scaffold(
-      body: SingleChildScrollView(
-          child: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-              ElevatedButton.icon(
+        backgroundColor: Theme.of(context).backgroundColor,
+        body: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                ElevatedButton.icon(
                   onPressed: () => {appController.logout()},
                   icon: const FaIcon(
                     FontAwesomeIcons.signOut,
+                    color: Colors.white,
+                  ),
+                  label: Text(
+                    "Logout",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue.shade900),
+                )
+              ]),
+              const Padding(
+                padding: EdgeInsets.only(top: 20, bottom: 20),
+                child: Text(
+                  "Profile",
+                  style: TextStyle(
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
                     color: Colors.black,
-                  ), label: Text("Logout", style: TextStyle(color: Colors.black),),
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.grey.shade50),
-                  )
-            ]),
-            const Padding(
-              padding: EdgeInsets.only(top: 20, bottom: 50),
-              child: Text(
-                "Profile",
-                style: TextStyle(
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Text(
+                "Name: ${appController.name.value}",
+                style: const TextStyle(
+                  fontSize: 22,
                   color: Colors.black,
                 ),
               ),
-            ),
-            Text(
-              "Name: ${appController.name.value}",
-              style: const TextStyle(
-                fontSize: 22,
-                color: Colors.black,
-              ),
-            ),
-            Text(
-              "Mobile: ${appController.mobile.value}",
-              style: const TextStyle(
-                fontSize: 22,
-                color: Colors.black,
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 40),
-              child: Divider(
-                color: Colors.grey,
-                height: 1,
-                thickness: 1,
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(bottom: 30),
-              child: Text(
-                "My Score",
-                style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
+              Text(
+                "Mobile: ${appController.mobile.value}",
+                style: const TextStyle(
+                  fontSize: 22,
                   color: Colors.black,
                 ),
               ),
-            ),
-            Column(children: [
-              Flex(
-                  direction: Axis.horizontal,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text("2022-10-22 10:00AM",
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 18)),
-                    Text("10", style: TextStyle(fontSize: 18))
-                  ]),
-              Flex(
-                  direction: Axis.horizontal,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text("2022-10-22 10:00AM",
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 18)),
-                    Text("10", style: TextStyle(fontSize: 18))
-                  ]),
-            ])
-          ],
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 20),
+                child: Divider(
+                  color: Colors.white60,
+                  height: 1,
+                  thickness: 1,
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(bottom: 30),
+                child: Text(
+                  "My Score",
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Obx(() => loadMyScores()),
+              )
+            ],
+          ),
+        ));
+  }
+
+  Widget loadMyScores() {
+    if (homeController.loadingMyScores.value) {
+      return const Center(
+        child: CircularProgressIndicator(
+          color: Colors.white,
         ),
-      )),
-    );
+      );
+    } else {
+      return ListView.builder(
+          itemCount: null == homeController.myScores
+              ? 0
+              : homeController.myScores.length,
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+              title: Text("${homeController.myScores[index]['datetime']}",
+                  style: TextStyle(color: Colors.white)),
+              trailing: Text(
+                "${homeController.myScores[index]['score']}",
+                style: TextStyle(color: Colors.blue.shade900, fontSize: 15),
+              ),
+            );
+          });
+    }
   }
 }

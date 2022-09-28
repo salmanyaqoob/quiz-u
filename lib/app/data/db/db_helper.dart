@@ -22,13 +22,13 @@ class DBHelper {
           );
         }, onOpen: (Database db) {
           print('opend database');
-          ;
         }
     );
 
     if (_db != null)
       print('we have database');
   }
+
   Future<int> insertScore(MyScore? myScore) async {
     print('insert to DB');
     return _db!.insert(tableName, myScore!.toJson());

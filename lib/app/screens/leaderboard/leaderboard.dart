@@ -27,6 +27,7 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreenStateful> {
     homeController.getTopScores();
 
     return Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         body: Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
@@ -52,7 +53,7 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreenStateful> {
     if (homeController.loadingLeaderBoard.value) {
       return const Center(
         child: CircularProgressIndicator(
-          color: Colors.blue,
+          color: Colors.white,
         ),
       );
     } else {
@@ -62,10 +63,10 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreenStateful> {
               : homeController.topScores!.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
-              title: Text("${homeController.topScores![index]!.name}"),
+              title: Text("${homeController.topScores![index]!.name}", style: TextStyle(color: Colors.white, fontSize: 15),),
               trailing: Text(
                 "${homeController.topScores![index]!.score}",
-                style: TextStyle(color: Colors.green, fontSize: 15),
+                style: TextStyle(color: Colors.blue.shade900, fontSize: 15),
               ),
             );
           });

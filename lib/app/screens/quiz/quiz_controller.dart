@@ -78,7 +78,7 @@ class QuizController extends GetxController {
   }
 
   void submitScore() async {
-    Get.snackbar("submission", "data");
+    //Get.snackbar("submission", "data");
     String? token = SharedPreferences().getToken();
     ScoreResponse? scoreResponse =
         await ApiService().submitScore(score.value.toString(), token);
@@ -88,7 +88,7 @@ class QuizController extends GetxController {
           score: score.value.toInt(),
           datetime: DateTime.now().toString());
       DBHelper().insertScore(myScore);
-      Get.off(SuccessScreen());
+      Get.off(SuccessScreen(), arguments: ["${score.value}"]);
     } else {
       Get.snackbar("Error", "${scoreResponse!.message}");
     }

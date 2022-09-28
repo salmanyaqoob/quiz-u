@@ -12,4 +12,12 @@ class SharedPreferences{
   void deleteToken(){
     GetStorage().remove("token");
   }
+
+  bool? getFirstTimeOpen() {
+    return GetStorage().read("first");
+  }
+
+  void setFirstTimeOpen() {
+    GetStorage().write("first", true);
+  }
 }

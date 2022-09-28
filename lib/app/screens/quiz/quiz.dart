@@ -11,6 +11,7 @@ class QuizScreen extends GetView<QuizController> {
     return WillPopScope(
         onWillPop: () => _onWillPop(context),
         child: Scaffold(
+            backgroundColor: Theme.of(context).backgroundColor,
             body: SafeArea(
                 child: Center(
                     child: Padding(
@@ -73,7 +74,7 @@ class QuizScreen extends GetView<QuizController> {
                           ),
                           SizedBox(
                             height: 46,
-                            child: Obx(() => skipOrSubmit()),
+                            child: Obx(() => skipOrSubmit(context)),
                           )
                         ],
                       ),
@@ -93,7 +94,7 @@ class QuizScreen extends GetView<QuizController> {
         return Container(
           padding: const EdgeInsets.all(16),
           decoration: const BoxDecoration(
-            color: Colors.white,
+            color: Colors.lightBlueAccent,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(24),
               topRight: Radius.circular(24),
@@ -123,7 +124,7 @@ class QuizScreen extends GetView<QuizController> {
           height: 24,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             TextButton(
               style: ButtonStyle(
@@ -173,7 +174,7 @@ class QuizScreen extends GetView<QuizController> {
       if (controller.loadingQuiz.value) {
         return const Center(
           child: CircularProgressIndicator(
-            color: Colors.blue,
+            color: Colors.white,
           ),
         );
       } else {
@@ -193,64 +194,64 @@ class QuizScreen extends GetView<QuizController> {
                   "${controller.quizQuestions?[index]?.question}",
                   style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                 ),
-                Text("${controller.quizQuestions?[index]?.correct}"),
+                // Text("${controller.quizQuestions?[index]?.correct}"),
                 Padding(padding: EdgeInsets.only(bottom: 10)),
                 TextButton(
                   style: TextButton.styleFrom(
-                    primary: Colors.black87,
-                    backgroundColor: Colors.grey,
-                    minimumSize: Size(double.infinity, 46),
-                    textStyle: TextStyle(fontSize: 26),
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(2.0)),
-                    ),
-                  ),
+                        primary: Colors.white,
+                        backgroundColor: Theme.of(context).buttonColor,
+                        minimumSize: Size(double.infinity, 46),
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        textStyle: TextStyle(fontSize: 26),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                        ),
+                      ),
                   onPressed: () => {controller.nextQuiz('a')},
                   child: Text("${controller.quizQuestions?[index]?.a}"),
                 ),
                 Padding(padding: EdgeInsets.only(bottom: 10)),
                 TextButton(
                   style: TextButton.styleFrom(
-                    primary: Colors.black87,
-                    backgroundColor: Colors.grey,
-                    minimumSize: Size(double.infinity, 46),
-                    textStyle: TextStyle(fontSize: 26),
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(2.0)),
-                    ),
-                  ),
+                        primary: Colors.white,
+                        backgroundColor: Theme.of(context).buttonColor,
+                        minimumSize: Size(double.infinity, 46),
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        textStyle: TextStyle(fontSize: 26),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                        ),
+                      ),
                   onPressed: () => {controller.nextQuiz('b')},
                   child: Text("${controller.quizQuestions?[index]?.b}"),
                 ),
                 Padding(padding: EdgeInsets.only(bottom: 10)),
                 TextButton(
                   style: TextButton.styleFrom(
-                    primary: Colors.black87,
-                    backgroundColor: Colors.grey,
-                    minimumSize: Size(double.infinity, 46),
-                    textStyle: TextStyle(fontSize: 26),
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(2.0)),
-                    ),
-                  ),
+                        primary: Colors.white,
+                        backgroundColor: Theme.of(context).buttonColor,
+                        minimumSize: Size(double.infinity, 46),
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        textStyle: TextStyle(fontSize: 26),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                        ),
+                      ),
                   onPressed: () => {controller.nextQuiz('c')},
                   child: Text("${controller.quizQuestions?[index]?.c}"),
                 ),
                 Padding(padding: EdgeInsets.only(bottom: 10)),
                 TextButton(
                   style: TextButton.styleFrom(
-                    primary: Colors.black87,
-                    backgroundColor: Colors.grey,
-                    minimumSize: Size(double.infinity, 46),
-                    textStyle: TextStyle(fontSize: 26),
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(2.0)),
-                    ),
-                  ),
+                        primary: Colors.white,
+                        backgroundColor: Theme.of(context).buttonColor,
+                        minimumSize: Size(double.infinity, 46),
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        textStyle: TextStyle(fontSize: 26),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                        ),
+                      ),
                   onPressed: () => {controller.nextQuiz('d')},
                   child: Text("${controller.quizQuestions?[index]?.d}"),
                 )
@@ -262,17 +263,17 @@ class QuizScreen extends GetView<QuizController> {
     }
   }
 
-  Widget skipOrSubmit() {
+  Widget skipOrSubmit(BuildContext context) {
     if (controller.isQuizFinished.value) {
       return TextButton(
         style: TextButton.styleFrom(
-          primary: Colors.black87,
-          backgroundColor: Colors.grey,
+          primary: Colors.white,
+          backgroundColor: Colors.green,
           minimumSize: Size(88, 46),
           textStyle: TextStyle(fontSize: 26),
           padding: EdgeInsets.symmetric(horizontal: 16.0),
           shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(2.0)),
+            borderRadius: BorderRadius.all(Radius.circular(6.0)),
           ),
         ),
         onPressed: () => {controller.submitScore()},
@@ -281,13 +282,13 @@ class QuizScreen extends GetView<QuizController> {
     } else {
       return TextButton(
         style: TextButton.styleFrom(
-          primary: Colors.black87,
-          backgroundColor: Colors.grey,
+          primary: Colors.white,
+          backgroundColor: Colors.orange,
           minimumSize: Size(88, 46),
-          textStyle: TextStyle(fontSize: 26),
           padding: EdgeInsets.symmetric(horizontal: 16.0),
+          textStyle: TextStyle(fontSize: 26),
           shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(2.0)),
+            borderRadius: BorderRadius.all(Radius.circular(6.0)),
           ),
         ),
         onPressed: () => {controller.skip()},

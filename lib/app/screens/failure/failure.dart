@@ -27,6 +27,7 @@ class _FailureScreenState extends State<FailureScreenStateful> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         body: SafeArea(
             child: Center(
                 child: Padding(
@@ -57,7 +58,8 @@ class _FailureScreenState extends State<FailureScreenStateful> {
                           width: 150,
                           alignment: Alignment.centerRight,
                         ),
-                        Text(
+
+                        const Text(
                           "Wrong Answer",
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -67,14 +69,13 @@ class _FailureScreenState extends State<FailureScreenStateful> {
                         ),
                         TextButton(
                           style: TextButton.styleFrom(
-                            primary: Colors.black87,
-                            backgroundColor: Colors.grey,
+                            primary: Colors.white,
+                            backgroundColor: Theme.of(context).buttonColor,
                             minimumSize: Size(88, 46),
                             padding: EdgeInsets.symmetric(horizontal: 16.0),
                             textStyle: TextStyle(fontSize: 26),
                             shape: const RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(2.0)),
+                              borderRadius: BorderRadius.all(Radius.circular(6.0)),
                             ),
                           ),
                           onPressed: () => {
@@ -86,6 +87,7 @@ class _FailureScreenState extends State<FailureScreenStateful> {
                           },
                           child: Text('Try Again'),
                         ),
+                        const SizedBox(height: 100,)
                       ],
                     )))));
   }

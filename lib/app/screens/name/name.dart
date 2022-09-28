@@ -7,6 +7,7 @@ class NameScreen extends GetView<NameController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         body: SafeArea(
             child: Center(
                 child: Padding(
@@ -47,14 +48,13 @@ class NameScreen extends GetView<NameController> {
                             ]),
                         TextButton(
                           style: TextButton.styleFrom(
-                            primary: Colors.black87,
-                            backgroundColor: Colors.grey,
+                            primary: Colors.white,
+                            backgroundColor: Theme.of(context).buttonColor,
                             minimumSize: Size(88, 46),
-                            textStyle: TextStyle(fontSize: 26),
                             padding: EdgeInsets.symmetric(horizontal: 16.0),
+                            textStyle: TextStyle(fontSize: 26),
                             shape: const RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(2.0)),
+                              borderRadius: BorderRadius.all(Radius.circular(6.0)),
                             ),
                           ),
                           onPressed: () async => {

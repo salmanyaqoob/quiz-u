@@ -12,10 +12,11 @@ class SplashView extends GetView<SplashController> {
     print("SplashView loaded");
     futureCall();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Theme.of(context).backgroundColor,
         body: SafeArea(
             child: Center(
                 child: Padding(
@@ -33,14 +34,17 @@ class SplashView extends GetView<SplashController> {
                 ),
               ),
               Image.asset('assets/images/timer.png', height: 150),
-              const CircularProgressIndicator(color: Colors.white,)
+              const CircularProgressIndicator(
+                color: Colors.white,
+              )
             ],
           ),
         ))));
   }
 
-    void futureCall() async {
-      final AppController appController = Get.find();
+  void futureCall() async {
+    final AppController appController = Get.find();
+    await Future.delayed(Duration(seconds: 3));
     // do async operation ( api call, auto login)
     String route = await appController.validateToken();
 

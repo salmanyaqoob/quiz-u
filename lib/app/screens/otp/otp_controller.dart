@@ -9,6 +9,7 @@ import '../../data/db/shared_preferences.dart';
 import '../../data/model/LoginResponse.dart';
 import '../login/login_controller.dart';
 import '../name/name_bindings.dart';
+import '../splash/app_controller.dart';
 
 class OtpController extends GetxController {
   var otp_number = "".obs;
@@ -41,7 +42,10 @@ class OtpController extends GetxController {
     LoginRequest loginRequest = LoginRequest(otp: otp_number.value, mobile: mobileNumber);
     LoginResponse? loginResponse = await ApiService().loginUser(loginRequest);
     print("loginResponse ${loginResponse?.toJson()}");
-    if(loginResponse!.success){
+    if(loginResponse!= null && loginResponse!.success){
+      final AppController appController = Get.find();
+      if(loginResponse.name != null) appController.name.value = loginResponse.name!;
+      if(loginResponse.mobile != null) appController.mobile.value = loginResponse.mobile!;
       SharedPreferences().saveToken(loginResponse.token);
       if((loginResponse.userStatus != null && loginResponse.userStatus == "new") || (loginResponse.name == null)){
         Get.to(NameScreen(), routeName: "/name", binding: NameBinding());
@@ -49,7 +53,7 @@ class OtpController extends GetxController {
         Get.to(HomeScreen(), routeName: "/home", binding: HomeBinding());
       }
     } else {
-      Get.snackbar("Error", loginResponse.message);
+      Get.snackbar("Error", (loginResponse != null)?loginResponse.message:"server error");
     }
   }
 

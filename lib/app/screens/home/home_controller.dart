@@ -5,6 +5,7 @@ import 'package:quiz_u/app/data/remote/api_services.dart';
 import 'package:quiz_u/app/screens/home/home.dart';
 import 'package:quiz_u/app/screens/splash/app_controller.dart';
 
+import '../../data/db/db_helper.dart';
 import '../../data/db/shared_preferences.dart';
 import '../../data/model/TokenResponse.dart';
 import 'package:get_storage/get_storage.dart';
@@ -14,9 +15,11 @@ import '../login/login_bindings.dart';
 
 class HomeController extends GetxController {
   var loadingLeaderBoard = true.obs;
+  var loadingMyScores = true.obs;
   var selectedIndex = 0.obs;
   var name = "".obs;
   List<TopScores?>? topScores = [new TopScores()].obs as List<TopScores>;
+  RxList myScores = [].obs;
 
   void updateSelectedIndex(var index) {
     print("index $index");
@@ -53,5 +56,13 @@ class HomeController extends GetxController {
     } else {
       if(nameResponse != null) Get.snackbar("Error", nameResponse.message);
     }
+  }
+
+  Future<List<Map<String, dynamic>>> getMyScores() async{
+    loadingMyScores.value = true;
+    List<Map<String, dynamic>> scores = await DBHelper().getAllScore();
+    myScores.value = scores;
+    loadingMyScores.value = false;
+    return scores;
   }
 }

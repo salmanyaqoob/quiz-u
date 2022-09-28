@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:quiz_u/app/screens/failure/failure.dart';
 import 'package:quiz_u/app/screens/home/home.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quiz_u/app/screens/home/home_bindings.dart';
+import 'package:share_plus/share_plus.dart';
 
 class SuccessScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return SuccessScreenStateful(
@@ -21,9 +25,13 @@ class SuccessScreenStateful extends StatefulWidget {
 }
 
 class _SuccessScreenState extends State<SuccessScreenStateful> {
+
   @override
   Widget build(BuildContext context) {
+    var data = Get.arguments;
+    String score = (data[0] != null)?data[0]:"";
     return Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         body: SafeArea(
             child: Center(
                 child: Padding(
@@ -37,11 +45,12 @@ class _SuccessScreenState extends State<SuccessScreenStateful> {
                             children: [
                               IconButton(
                                   onPressed: () => {
-                                        Navigator.push(context,
-                                            MaterialPageRoute(builder:
-                                                (BuildContext context) {
-                                          return HomeScreen();
-                                        }))
+                                        // Navigator.push(context,
+                                        //     MaterialPageRoute(builder:
+                                        //         (BuildContext context) {
+                                        //   return HomeScreen();
+                                        // }))
+                                    Get.off(HomeScreen(), routeName: "/home", binding: HomeBinding())
                                       },
                                   icon: const FaIcon(
                                     FontAwesomeIcons.close,
@@ -56,8 +65,8 @@ class _SuccessScreenState extends State<SuccessScreenStateful> {
                         Column(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            children: const <Widget>[
-                              Text(
+                            children: <Widget>[
+                              const Text(
                                 "You have completed",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -66,15 +75,15 @@ class _SuccessScreenState extends State<SuccessScreenStateful> {
                                 ),
                               ),
                               Text(
-                                "10",
+                                "$score",
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 32,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
                                 ),
                               ),
-                              Text(
+                              const Text(
                                 "correct answers!",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -85,10 +94,7 @@ class _SuccessScreenState extends State<SuccessScreenStateful> {
                             ]),
                         ElevatedButton.icon(
                           onPressed: () => {
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (BuildContext context) {
-                              return FailureScreen();
-                            }))
+                          Share.share('I answered $score correct answers in QuizU!')
                           },
                           icon: Icon(
                             // <-- Icon
@@ -97,8 +103,9 @@ class _SuccessScreenState extends State<SuccessScreenStateful> {
                           ),
                           label: Text('Share'),
                           style:
-                              ElevatedButton.styleFrom(backgroundColor: null),
+                              ElevatedButton.styleFrom(backgroundColor: Colors.blue.shade900),
                         ),
+                        SizedBox(height: 100,)
                       ],
                     )))));
   }

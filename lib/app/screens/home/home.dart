@@ -17,51 +17,48 @@ class HomeScreen extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return
       WillPopScope(onWillPop: () => _onWillPop(context),
-      child: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text("Quiz U ⏳"),
-            backgroundColor: Colors.white,
-            automaticallyImplyLeading: false,
-            titleTextStyle: TextStyle(color: Colors.black),
-          ),
-          bottomNavigationBar: BottomAppBar(
-            clipBehavior: Clip.antiAlias,
-            shape: CircularNotchedRectangle(),
-            notchMargin: 10.0,
-            child: BottomNavigationBar(
-                currentIndex: _selectedIndex,
-                selectedItemColor: Colors.white,
-                backgroundColor: Colors.white70,
-                onTap: (value) {
-                  controller.updateSelectedIndex(value);
-                  _selectedIndex = value;
-                },
-                items: const [
-                  BottomNavigationBarItem(
-                    icon: FaIcon(FontAwesomeIcons.home, color: Colors.grey),
-                    activeIcon:
-                    FaIcon(FontAwesomeIcons.home, color: Colors.black),
-                    label: '',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: FaIcon(FontAwesomeIcons.trophy, color: Colors.grey),
-                    activeIcon:
-                    FaIcon(FontAwesomeIcons.trophy, color: Colors.black),
-                    label: '',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: FaIcon(FontAwesomeIcons.solidUser, color: Colors.grey),
-                    activeIcon:
-                    FaIcon(FontAwesomeIcons.solidUser, color: Colors.black),
-                    label: '',
-                  ),
-                ]),
-          ),
-          body: Obx(() => findPage()),
+      child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text("Quiz U ⏳"),
+          automaticallyImplyLeading: false,
+          titleTextStyle: TextStyle(color: Colors.white, fontSize: 18),
         ),
-      ),);
+        bottomNavigationBar: BottomAppBar(
+          clipBehavior: Clip.antiAlias,
+          shape: CircularNotchedRectangle(),
+          notchMargin: 10.0,
+          child: Obx(()=>BottomNavigationBar(
+              currentIndex: controller.selectedIndex.value,
+              onTap: (value) {
+                controller.updateSelectedIndex(value);
+                _selectedIndex = value;
+              },
+              items: const [
+                BottomNavigationBarItem(
+                  icon: FaIcon(FontAwesomeIcons.home, color: Colors.grey),
+                  activeIcon:
+                  FaIcon(FontAwesomeIcons.home, color: Colors.deepPurple),
+                  label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                  icon: FaIcon(FontAwesomeIcons.trophy, color: Colors.grey),
+                  activeIcon:
+                  FaIcon(FontAwesomeIcons.trophy, color: Colors.deepPurple),
+                  label: 'Leaderboard',
+                ),
+                BottomNavigationBarItem(
+                  icon: FaIcon(FontAwesomeIcons.solidUser, color: Colors.grey),
+                  activeIcon:
+                  FaIcon(FontAwesomeIcons.solidUser, color: Colors.deepPurple),
+                  label: 'Profile',
+                ),
+              ])),
+        ),
+        body: Obx(() => findPage(context)),
+      ),
+      );
   }
 
   Future<bool> _onWillPop(BuildContext context) async {
@@ -77,7 +74,7 @@ class HomeScreen extends GetView<HomeController> {
         return Container(
           padding: const EdgeInsets.all(16),
           decoration: const BoxDecoration(
-            color: Colors.white,
+            color: Colors.lightBlueAccent,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(24),
               topRight: Radius.circular(24),
@@ -104,7 +101,7 @@ class HomeScreen extends GetView<HomeController> {
           height: 24,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             TextButton(
               style: ButtonStyle(
@@ -134,17 +131,17 @@ class HomeScreen extends GetView<HomeController> {
     );
   }
 
-  Widget findPage() {
+  Widget findPage(BuildContext context) {
     if (controller.selectedIndex.value == 1) {
       return LeaderBoardScreen();
     } else if (controller.selectedIndex.value == 2) {
       return ProfileScreen();
     } else {
-      return homePageDesign();
+      return homePageDesign(context);
     }
   }
 
-  Widget homePageDesign() {
+  Widget homePageDesign(BuildContext context) {
     return SafeArea(
       child: Center(
         child: Padding(
@@ -170,13 +167,13 @@ class HomeScreen extends GetView<HomeController> {
                 children: [
                   TextButton(
                     style: TextButton.styleFrom(
-                      primary: Colors.black87,
-                      backgroundColor: Colors.grey,
+                      primary: Colors.white,
+                      backgroundColor: Theme.of(context).buttonColor,
                       minimumSize: Size(88, 46),
-                      textStyle: TextStyle(fontSize: 26),
                       padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      textStyle: TextStyle(fontSize: 26),
                       shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(2.0)),
+                        borderRadius: BorderRadius.all(Radius.circular(6.0)),
                       ),
                     ),
                     onPressed: () => {
